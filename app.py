@@ -11,11 +11,11 @@ def page_all_posts():
     data = functions.get_all_posts()
     return render_template('index.html', data=data)
 
-@app.route("/post/<post_id>", methods=["GET"])
-def page_post_by_id(post_id):
-    post = functions.get_posts_by_post_id(post_id)
-    comments = functions.get_comments_by_post_id(post_id)
-    return render_template('post.html', post=post, comments=comments)
+@app.route("/post/<int:pk>/")
+def page_post_by_pk(pk):
+    posts = functions.get_post_by_pk(pk)
+    comments = functions.get_comments_by_post_pk(pk)
+    return render_template('post.html', posts=posts, comments=comments)
 
 @app.route("/user/<user_name>", methods=["GET"])
 def page_posts_by_name(user_name):

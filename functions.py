@@ -35,15 +35,16 @@ def get_all_comments():
         data = json.load(file)
     return data
 
-def get_comments_by_post_id(post_id):
+def get_comments_by_post_pk(pk):
     data = get_all_comments()
+    posts_found = []
     for post in data:
-        if post_id in data["post_id"]:
-            if data['post_id'] is None or data['post_id'] == '':
-                return ''
-            else:
-                return post["comment"]
-        raise KeyError('Нет такого поста')
+        if pk == post["post_id"]:
+            posts_found.append(post)
+            return posts_found
+        else:
+            return ''
+
 
 def search_posts(q):
     data = get_all_posts()
