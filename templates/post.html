@@ -8,6 +8,7 @@
   <link href="/static/css/styles.min.css" rel="stylesheet">
 </head>
 
+{% for post in posts %}
 <body>
   <header class="container header">
     <div class="header__wrapper">
@@ -47,13 +48,13 @@
         </div>
         <div class="item__bottom">
           <div class="item__post-info">
-            <p class="item__comments-counter"> {{ len(comments) }} комментариев </p>
+            <p class="item__comments-counter"> {{ comments | count }} комментариев </p>
           </div>
-
+{% endfor %}
         {% for item in comments %}
           <div class="item__comments">
             <p class="item__comment">
-              <b>{{ comments.commenter_name }}</b> {{ comments.comment}}
+              <b>{{ comments.commenter_name }}</b> {{ comments.comment }}
             </p>
           </div>
         {% endfor %}

@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, send_from_directory, jsonify
+from flask import Flask, request, render_template, send_from_directory, jsonify, make_response
 import functions
 import logging
 import json
@@ -11,11 +11,22 @@ def page_all_posts():
     data = functions.get_all_posts()
     return render_template('index.html', data=data)
 
-@app.route("/post/<int:pk>/")
+
+
+@app.route("/post/<int:pk>")
 def page_post_by_pk(pk):
     posts = functions.get_post_by_pk(pk)
     comments = functions.get_comments_by_post_pk(pk)
     return render_template('post.html', posts=posts, comments=comments)
+
+@app.errorhandler(404)
+def not_found(e):
+   return 'Страница не найдена'
+
+@app.errorhandler(500)
+def not_found(e):
+   return 'Ощибка на стороне сервера'
+
 
 @app.route("/user/<user_name>", methods=["GET"])
 def page_posts_by_name(user_name):
