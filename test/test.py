@@ -43,3 +43,5 @@ def test_search_posts(q):
     posts_found = []
     for post in data:
         assert q.lower() in post['content'].lower(), 'Нет такого слова в постах'
+
+

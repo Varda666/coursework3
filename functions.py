@@ -6,6 +6,7 @@ from pprint import pp
 
 
 def get_all_posts():
+    """ Возвращает все посты """
     try:
         with open(f"data/data.json", 'r', encoding='utf-8') as file:
             data = json.load(file)
@@ -18,6 +19,7 @@ def get_all_posts():
 
 
 def get_posts_by_post_id(post_id):
+    """ Возвращает все посты по номеру id """
     data = get_all_posts()
     for post in data:
         if post_id in post["pk"]:
@@ -28,6 +30,7 @@ def get_posts_by_post_id(post_id):
 
 
 def get_posts_by_user(user_name):
+    """ Возвращает все посты по имени автора """
     user_name = str(user_name).lower()
     data = get_all_posts()
     posts_found = []
@@ -40,6 +43,7 @@ def get_posts_by_user(user_name):
     raise KeyError('Нет такого пользователя')
 
 def get_all_comments():
+    """ Возвращает все комментарии """
     try:
         with open("data/comments.json", 'r', encoding='utf-8') as file:
             data = json.load(file)
@@ -50,13 +54,14 @@ def get_all_comments():
         return 'Файл не преобразуется'
 
 def get_comments_by_post_pk(pk):
+    """ Возвращает все комментарии по номеру поста"""
     data = get_all_comments()
     comment_found = []
     try:
         for comment in data:
             if pk == comment["post_id"]:
                 comment_found.append(comment)
-                return comment_found
+        return comment_found
     except KeyError:
         return 'Поста с таким номером нет'
     except ValueError:
@@ -64,6 +69,7 @@ def get_comments_by_post_pk(pk):
 
 
 def search_posts(q):
+    """ Ищет посты по ключевому слову """
     data = get_all_posts()
     posts_found = []
     for post in data:
@@ -72,12 +78,12 @@ def search_posts(q):
     return posts_found
 
 def get_post_by_pk(pk):
+    """ Возвращает все посты по номеру pk """
     data = get_all_posts()
-    posts_found = []
     for post in data:
         if post["pk"] == pk:
-            posts_found.append(post)
-    return posts_found
+            return post
+
 
 
 
