@@ -17,6 +17,6 @@ def test_one():
     keys = ["poster_avatar", "poster_name", "views_count", "content", 'likes_count', 'pic', 'pk', 'c']
     for item in response.json:
         for key in item:
-            assert key in keys, 'Такого ключа в словаре нет'
+            assert key in key, 'Такого ключа в словаре нет'
 
 
