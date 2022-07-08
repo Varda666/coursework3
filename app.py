@@ -36,7 +36,7 @@ def page_posts_by_name(user_name):
     return render_template('user-feed.html', posts=posts)
 
 @app.route("/search/")
-def page_found_posts(q):
+def page_found_posts():
     q = request.args.get("q")
     posts = functions.search_posts(q)
     return render_template('search.html', posts=posts)
@@ -54,6 +54,6 @@ def page_posts_by_pk_in_json(pk):
     logger_one.info(f"Запрос api/posts{pk}")
     return jsonify(data)
 
-
-app.run()
+if __name__ == "__main__":
+    app.run()
 
